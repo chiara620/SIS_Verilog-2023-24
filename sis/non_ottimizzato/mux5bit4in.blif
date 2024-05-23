@@ -1,0 +1,11 @@
+.model mux5bit4in
+.inputs X1 X2 a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 c1 c2 c3 c4 c5 d1 d2 d3 d4 d5
+.outputs o1 o2 o3 o4 o5
+.subckt mux1bit4in S1=X1 S2=X2 i1=a1 i2=b1 i3=c1 i4=d1 out=o1
+.subckt mux1bit4in S1=X1 S2=X2 i1=a2 i2=b2 i3=c2 i4=d2 out=o2
+.subckt mux1bit4in S1=X1 S2=X2 i1=a3 i2=b3 i3=c3 i4=d3 out=o3
+.subckt mux1bit4in S1=X1 S2=X2 i1=a4 i2=b4 i3=c4 i4=d4 out=o4
+.subckt mux1bit4in S1=X1 S2=X2 i1=a5 i2=b5 i3=c5 i4=d5 out=o5
+
+.search mux1bit4in.blif
+.end

@@ -1,0 +1,200 @@
+.model FSMD
+.inputs PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA
+.outputs MANCHE_1 MANCHE_2 PARTITA_1 PARTITA_2
+.latch    [2] LatchOut_v5   1
+.latch    [3] LatchOut_v6   0
+.latch    [4] LatchOut_v7   0
+.latch    van_1 VAN_1 re NIL 0
+.latch    van_2 VAN_2 re NIL 0
+.latch    van_3 VAN_3 re NIL 0
+.latch    van_4 VAN_4 re NIL 0
+.latch    maxmanche_1 MAXMANCHE_1 re NIL 0
+.latch    maxmanche_2 MAXMANCHE_2 re NIL 0
+.latch    maxmanche_3 MAXMANCHE_3 re NIL 0
+.latch    maxmanche_4 MAXMANCHE_4 re NIL 0
+.latch    maxmanche_5 MAXMANCHE_5 re NIL 0
+.latch    nmanche_1 NMANCHE_1 re NIL 0
+.latch    nmanche_2 NMANCHE_2 re NIL 0
+.latch    nmanche_3 NMANCHE_3 re NIL 0
+.latch    nmanche_4 NMANCHE_4 re NIL 0
+.latch    nmanche_5 NMANCHE_5 re NIL 0
+.names PRIMO_1 PRIMO_2 SECONDO_2 INIZIA LatchOut_v6 [3] [4] [28] [346] [348] \
+[352] [363] MANCHE_1
+-------1-1-- 1
+-1----0--1-- 1
+---0100----- 1
+1--00--1---- 1
+--0--01-1--- 1
+-1--0-----01 1
+.names PRIMO_1 PRIMO_2 SECONDO_2 MANCHE_1 LatchOut_v5 LatchOut_v6 [3] [4] [28] \
+LatchOut_v7 [13] [352] [363] MANCHE_2
+0-11--------- 1
+---0-01------ 1
+---1--0-1---- 1
+---0---1-0--- 1
+------10--00- 1
+01--1---0---1 1
+.names pareggio van_1 [342] [359] [362] PARTITA_1
+11--- 1
+1-0-- 1
+1--0- 1
+-11-1 1
+.names pareggio van_1 [342] [359] [362] PARTITA_2
+10--- 1
+1-0-- 1
+1---0 1
+-011- 1
+.names PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 [4] \
+[28] [13] [346] [348] [349] [363] [3]
+----0-1--1---- 1
+1------1--1--- 1
+--------1---01 1
+-0--001------- 1
+1-1--0-1------ 1
+-0-1---0---1-- 1
+-0---1---0---1 1
+-0------10---1 1
+.names PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 [13] \
+[346] [348] [349] [352] [4]
+-------1-1-- 1
+0--------1-1 1
+-1100------- 1
+---001--0--- 1
+11----1--1-- 1
+011-0-----1- 1
+.names SECONDO_1 [4] [28]
+10 1
+.names PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 [13]
+00-- 1
+--00 1
+.names PRIMO_1 SECONDO_2 INIZIA MANCHE_1 MANCHE_2 LatchOut_v5 [28] [345] [2]
+--1----- 1
+0--1---- 1
+-0--1--- 1
+---1--1- 1
+-----1-0 1
+.names PRIMO_1 PRIMO_2 INIZIA MAXMANCHE_1 maxmanche_1
+--01 1
+111- 1
+.names PRIMO_1 PRIMO_2 INIZIA MAXMANCHE_2 maxmanche_2
+--01 1
+011- 1
+101- 1
+.names PRIMO_2 INIZIA MAXMANCHE_3 maxmanche_3
+01- 1
+-01 1
+.names SECONDO_1 INIZIA MAXMANCHE_4 maxmanche_4
+11- 1
+-01 1
+.names SECONDO_2 INIZIA MAXMANCHE_5 maxmanche_5
+11- 1
+-01 1
+.names NMANCHE_3 NMANCHE_4 NMANCHE_5 [345] [68]
+1111 1
+.names INIZIA NMANCHE_1 [356] nmanche_1
+-00 1
+011 1
+.names INIZIA [68] NMANCHE_2 nmanche_2
+-10 1
+001 1
+.names INIZIA [68] nmanche_4 NMANCHE_3 NMANCHE_4 nmanche_3
+00-1- 1
+0-001 1
+.names INIZIA MANCHE_2 nmanche_5 NMANCHE_4 NMANCHE_5 [347] nmanche_4
+--11-- 1
+-0-1-1 1
+0-001- 1
+.names INIZIA NMANCHE_5 [345] nmanche_5
+-01 1
+010 1
+.names maxmanche_2 maxmanche_4 maxmanche_5 nmanche_2 nmanche_4 nmanche_5 [338] \
+[340] pareggio
+11111111 1
+01101111 1
+10110111 1
+00100111 1
+11011011 1
+01001011 1
+10010011 1
+00000011 1
+.names MANCHE_1 MANCHE_2 dasommare_3
+10 1
+.names MANCHE_1 MANCHE_2 dasommare_3 dasommare_4
+--1 1
+01- 1
+.names VAN_1 VAN_2 VAN_3 dasommare_3 van_4 [347] [350] [353] van_1
+1---1--- 1
+11-1---- 1
+-00----0 1
+11---11- 1
+.names van_1 van_4 [347] [350] [355] [368] van_2
+1----1 1
+--1--0 1
+-0101- 1
+.names VAN_3 VAN_4 dasommare_3 dasommare_4 van_1 van_4 [347] [350] [353] [355] \
+van_3
+0-------0- 1
+1---1---1- 1
+--0110---- 1
+10----1--1 1
+--1--0-0-1 1
+0--1-01--1 1
+.names VAN_1 VAN_2 VAN_4 dasommare_4 [347] [355] [368] van_4
+---1--0 1
+--01-1- 1
+1101--- 1
+--1011- 1
+11101-- 1
+.names maxmanche_1 nmanche_1 [338]
+11 1
+00 1
+.names maxmanche_3 nmanche_3 [340]
+11 1
+00 1
+.names nmanche_1 nmanche_2 nmanche_3 [342]
+1-- 1
+-1- 1
+--1 1
+.names MANCHE_1 MANCHE_2 [345]
+1- 1
+-1 1
+.names LatchOut_v6 LatchOut_v7 [346]
+1- 1
+-0 1
+.names INIZIA dasommare_3 [347]
+00 1
+.names INIZIA LatchOut_v7 [348]
+01 1
+.names LatchOut_v5 LatchOut_v6 [349]
+0- 1
+-0 1
+.names VAN_3 dasommare_4 [350]
+0- 1
+-0 1
+.names SECONDO_1 LatchOut_v5 [352]
+1- 1
+-0 1
+.names dasommare_3 van_4 [353]
+0- 1
+-0 1
+.names VAN_1 VAN_2 [355]
+00 1
+.names [68] NMANCHE_2 [356]
+0- 1
+-0 1
+.names VAN_2 VAN_3 [357]
+0- 1
+-1 1
+.names van_2 van_3 [359]
+1- 1
+-1 1
+.names van_2 van_3 van_4 [362]
+0-- 1
+-0- 1
+--0 1
+.names SECONDO_2 INIZIA [363]
+10 1
+.names VAN_4 [357] [368]
+1- 1
+-1 1
+.end

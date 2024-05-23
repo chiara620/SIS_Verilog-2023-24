@@ -1,0 +1,19 @@
+.model aggregatore
+.inputs P1 P2 S1 S2
+.outputs A1 A2 A3 A4 A5
+
+.names P1 P2 S1 S2 A1
+
+.names P1 A2
+1 1
+
+.names P2 A3
+1 1
+
+.names S1 A4
+1 1
+
+.names S2 A5
+1 1
+
+.end 

@@ -1,0 +1,10 @@
+.model reg4bit
+.inputs A1 A2 A3 A4
+.outputs O1 O2 O3 O4
+.subckt reg1bit A=A1 O=O1
+.subckt reg1bit A=A2 O=O2
+.subckt reg1bit A=A3 O=O3
+.subckt reg1bit A=A4 O=O4
+
+.search reg1bit.blif
+.end

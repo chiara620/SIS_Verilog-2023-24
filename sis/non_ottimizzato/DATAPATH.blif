@@ -1,0 +1,200 @@
+.model DATAPATH
+.inputs PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA MANCHE_1 MANCHE_2
+.outputs PARTITA_1 PARTITA_2
+
+
+# Costanti
+.names ZERO
+.subckt COSTANTE00100 o1=C1 o2=C2 o3=C3 o4=C4 o5=C5 
+.subckt COSTANTE00000 o1=C6 o2=C7 o3=C8 o4=C9 o5=C10
+.subckt COSTANTE00001 o1=C11 o2=C12 o3=C13 o4=C14 o5=C15
+.subckt COSTANTE0000 o1=C16 o2=C17 o3=C18 o4=C19
+.subckt COSTANTE0001 o1=C20 o2=C21 o3=C22 o4=C23
+.subckt COSTANTE1111 o1=C24 o2=C25 o3=C26 o4=C27
+.subckt COSTANTE00011 o1=C28 o2=C29 o3=C30 o4=C31 o5=C32
+.subckt COSTANTE10 o1=C33 o2=C34
+.subckt COSTANTE00 o1=C35 o2=C36
+.subckt COSTANTE01 o1=C37 o2=C38
+.subckt COSTANTE11 o1=C39 o2=C40
+
+
+# Elaborazione
+
+# Componente che "aggrega" i valori di primo e secondo
+.subckt aggregatore P1=PRIMO_1 P2=PRIMO_2 S1=SECONDO_1 S2=SECONDO_2 A1=aggregato_1 A2=aggregato_2 A3=aggregato_3 A4=aggregato_4 A5=aggregato_5
+
+# Sommatore che aggiunge '4' all'aggregato di primo e secondo
+.subckt sommatore5bit A1=aggregato_1 A2=aggregato_2 A3=aggregato_3 A4=aggregato_4 A5=aggregato_5 B1=C1 B2=C2 B3=C3 B4=C4 B5=C5 CIN=ZERO O1=sommato_1 O2=sommato_2 O3=sommato_3 O4=sommato_4 O5=sommato_5 COUT=COUT2
+
+# Multiplexer che imposta il valore di maxmanche quando INIZIA vale 1
+.subckt mux5bit2in S=INIZIA A1=sommato_1 A2=sommato_2 A3=sommato_3 A4=sommato_4 A5=sommato_5 B1=MAXMANCHE_1 B2=MAXMANCHE_2 B3=MAXMANCHE_3 B4=MAXMANCHE_4 B5=MAXMANCHE_5 o1=maxmanche_1 o2=maxmanche_2 o3=maxmanche_3 o4=maxmanche_4 o5=maxmanche_5
+
+# Registro maxmanche
+.subckt reg5bit A1=maxmanche_1 A2=maxmanche_2 A3=maxmanche_3 A4=maxmanche_4 A5=maxmanche_5 O1=MAXMANCHE_1 O2=MAXMANCHE_2 O3=MAXMANCHE_3 O4=MAXMANCHE_4 O5=MAXMANCHE_5
+
+# Multiplexer che imposta il registro nmanche a 0 quando INIZIA vale 1
+.subckt mux5bit2in S=INIZIA A1=C6 A2=C7 A3=C8 A4=C9 A5=C10 B1=aggiornato_1 B2=aggiornato_2 B3=aggiornato_3 B4=aggiornato_4 B5=aggiornato_5 o1=nmanche_1 o2=nmanche_2 o3=nmanche_3 o4=nmanche_4 o5=nmanche_5
+
+# Registro nmanche
+.subckt reg5bit A1=nmanche_1 A2=nmanche_2 A3=nmanche_3 A4=nmanche_4 A5=nmanche_5 O1=NMANCHE_1 O2=NMANCHE_2 O3=NMANCHE_3 O4=NMANCHE_4 O5=NMANCHE_5
+
+# Sommatore che aggiunge 1 a nmanche ad ogni manche valida
+.subckt sommatore5bit A1=NMANCHE_1 A2=NMANCHE_2 A3=NMANCHE_3 A4=NMANCHE_4 A5=NMANCHE_5 B1=sommauno_1 B2=sommauno_2 B3=sommauno_3 B4=sommauno_4 B5=sommauno_5 CIN=ZERO O1=aggiornato_1 O2=aggiornato_2 O3=aggiornato_3 O4=aggiornato_4 O5=aggiornato_5 COUT=COUT3
+
+# "Diverso" che controlla quando/se nmanche ha raggiunto maxmanche
+.subckt uguale5bit A1=nmanche_1 A2=nmanche_2 A3=nmanche_3 A4=nmanche_4 A5=nmanche_5 B1=maxmanche_1 B2=maxmanche_2 B3=maxmanche_3 B4=maxmanche_4 B5=maxmanche_5 O=pareggio
+
+# Multiplexer che fa aggiungere 1 al sommatore che arriverà a manche, se il risultato di manche è valido
+.subckt mux5bit4in X1=MANCHE_1 X2=MANCHE_2 a1=C6 a2=C7 a3=C8 a4=C9 a5=C10 b1=C11 b2=C12 b3=C13 b4=C14 b5=C15 c1=C11 c2=C12 c3=C13 c4=C14 c5=C15 d1=C11 d2=C12 d3=C13 d4=C14 d5=C15 o1=sommauno_1 o2=sommauno_2 o3=sommauno_3 o4=sommauno_4 o5=sommauno_5
+
+# Multiplexer che imposta il registro Vantaggio a 0 quando INZIA vale uno
+.subckt mux4bit2in a1=C16 a2=C17 a3=C18 a4=C19 b1=vantaggio_1 b2=vantaggio_2 b3=vantaggio_3 b4=vantaggio_4 S=INIZIA o1=van_1 o2=van_2 o3=van_3 o4=van_4
+
+# Multiplexer che lascia invariato il reg van se manche è 00 o 11, mentre se è 10 o 01 gli toglie o aggiunge 1
+.subckt mux4bit4in X1=MANCHE_1 X2=MANCHE_2 a1=C16 a2=C17 a3=C18 a4=C19 b1=C20 b2=C21 b3=C22 b4=C23 c1=C24 c2=C25 c3=C26 c4=C27 d1=C16 d2=C17 d3=C18 d4=C19 o1=dasommare_1 o2=dasommare_2 o3=dasommare_3 o4=dasommare_4
+
+# Sommatore che aumenta il reg Van di 1 se ha vinto il G1, lo diminuisce di 1 se ha vinto il G2
+.subckt sommatore4bitincadue a1=VAN_1 a2=VAN_2 a3=VAN_3 a4=VAN_4 b1=dasommare_1 b2=dasommare_2 b3=dasommare_3 b4=dasommare_4 o1=vantaggio_1 o2=vantaggio_2 o3=vantaggio_3 o4=vantaggio_4
+
+# Registro VAN
+.subckt reg4bit A1=van_1 A2=van_2 A3=van_3 A4=van_4 O1=VAN_1 O2=VAN_2 O3=VAN_3 O4=VAN_4
+
+# Comparatore "maggiore" che controlla che siano state effettuate più di tre manche
+.subckt maggiore5bit A1=nmanche_1 A2=nmanche_2 A3=nmanche_3 A4=nmanche_4 A5=nmanche_5 B1=C28 B2=C29 B3=C30 B4=C31 B5=C32 AgtB=almenoquattro
+
+# Comparatore "maggiore o uguale" che controlla se il registro vantaggio ha assunto un valore superiore o uguale a due
+.subckt maggioreugualedue A1=van_1 A2=van_2 A3=van_3 A4=van_4 o=maggiorediuno
+
+# Comparatore "minore o uguale" che controlla se il registro vantaggio ha assunto un valore inferiore o uguale a meno due
+.subckt minoreugualemenodue A1=van_1 A2=van_2 A3=van_3 A4=van_4 o=minoremenouno
+
+# Porta AND che manda 1 se sono state giocate almeno 4 manche e ha vinto G2
+.subckt and A=almenoquattro B=minoremenouno X=G2
+
+# Porta AND che manda 1 se sono state giocate almeno 4 manche e ha vinto G1
+.subckt and A=almenoquattro B=maggiorediuno X=G1
+
+# Multiplexer che manda 11 se nmanche e maxmanche sono uguali, altrimenti 00
+.subckt mux2bit2in a1=C39 a2=C40 b1=C35 b2=C36 S=pareggio o1=parziale_1 o2=parziale_2
+
+# Multiplexer che manda 10 se ha vinto il G2, altrimenti il risultato del multiplexer che controlla se nmanche e maxmanche sono uguali
+.subckt mux2bit2in a1=C33 a2=C34 b1=parziale_1 b2=parziale_2 S=G2 o1=totale_1 o2=totale_2
+
+# Multiplexer che manda 01 se ha vinto il G1, altrimenti il risultato del multiplexer che controlla se ha vinto il G2
+.subckt mux2bit2in a1=C37 a2=C38 b1=totale_1 b2=totale_2 S=G1 o1=PARTITA_1 o2=PARTITA_2
+
+
+.model COSTANTE00100
+.outputs o1 o2 o3 o4 o5
+.names o1
+.names o2
+.names o3
+1
+.names o4
+.names o5
+.end
+
+.model COSTANTE00000
+.outputs o1 o2 o3 o4 o5
+.names o1
+.names o2
+.names o3
+.names o4
+.names o5
+.end
+
+.model COSTANTE00001
+.outputs o1 o2 o3 o4 o5
+.names o1
+.names o2
+.names o3
+.names o4
+.names o5
+1
+.end
+
+.model COSTANTE0000
+.outputs o1 o2 o3 o4
+.names o1
+.names o2
+.names o3
+.names o4
+.end
+
+.model COSTANTE0001
+.outputs o1 o2 o3 o4
+.names o1
+.names o2
+.names o3
+.names o4
+1
+.end
+
+.model COSTANTE1111
+.outputs o1 o2 o3 o4
+.names o1
+1
+.names o2
+1
+.names o3
+1
+.names o4
+1
+.end
+
+.model COSTANTE00011
+.outputs o1 o2 o3 o4 o5
+.names o1
+.names o2
+.names o3
+.names o4
+1
+.names o5
+1
+.end
+
+.model COSTANTE10
+.outputs o1 o2
+.names o1
+1
+.names o2
+.end
+
+.model COSTANTE00
+.outputs o1 o2
+.names o1
+.names o2
+.end
+
+.model COSTANTE01
+.outputs o1 o2
+.names o1
+.names o2
+1
+.end
+
+.model COSTANTE11
+.outputs o1 o2
+.names o1
+1
+.names o2
+1
+.end
+
+
+# Componenti
+.search aggregatore.blif
+.search sommatore5bit.blif
+.search maggiore5bit.blif
+.search mux5bit2in.blif
+.search reg5bit.blif
+.search mux5bit4in.blif
+.search mux4bit2in.blif
+.search mux4bit4in.blif
+.search sommatore4bitincadue.blif
+.search reg4bit.blif
+.search maggioreugualedue.blif
+.search minoreugualemenodue.blif
+.search and.blif
+.search mux2bit2in.blif
+.search uguale5bit.blif

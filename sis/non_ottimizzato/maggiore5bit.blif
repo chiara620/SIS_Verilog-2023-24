@@ -1,0 +1,19 @@
+.model maggiore5bit
+.inputs A1 A2 A3 A4 A5 B1 B2 B3 B4 B5
+.outputs AgtB
+
+.subckt xor A=A1 B=B1 X=X1
+.subckt xor A=A2 B=B2 X=X2
+.subckt xor A=A3 B=B3 X=X3
+.subckt xor A=A4 B=B4 X=X4
+.subckt xor A=A5 B=B5 X=X5
+
+.names A1 A2 A3 A4 A5 X1 X2 X3 X4 X5 AgtB
+1----1---- 1
+-1---01--- 1
+--1--001-- 1
+---1-0001- 1
+----100001 1
+
+.search xor.blif
+.end

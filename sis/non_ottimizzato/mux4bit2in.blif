@@ -1,0 +1,16 @@
+.model mux4bit2in
+.inputs a1 a2 a3 a4 b1 b2 b3 b4 S
+.outputs o1 o2 o3 o4
+.names S a1 b1 o1
+11- 1
+0-1 1
+.names S a2 b2 o2
+11- 1
+0-1 1
+.names S a3 b3 o3
+11- 1
+0-1 1
+.names S a4 b4 o4
+11- 1
+0-1 1
+.end

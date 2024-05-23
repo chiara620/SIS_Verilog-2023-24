@@ -1,0 +1,165 @@
+.model FSMassegnata
+.inputs PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA
+.outputs MANCHE_1 MANCHE_2
+.latch    [2] LatchOut_v5   1
+.latch    [3] LatchOut_v6   0
+.latch    [4] LatchOut_v7   0
+.start_kiss
+.i 5
+.o 2
+.p 72
+.s 7
+.r A
+----1 A A 00
+00--0 A A 00
+--000 A A 00
+01010 A A 11
+10100 A A 11
+11110 A A 11
+01110 A B 01
+10010 A C 01
+11100 A D 01
+11010 A E 10
+01100 A F 10
+10110 A G 10
+----1 B A 00
+00--0 B B 00
+--000 B B 00
+01--0 B B 00
+10100 B A 11
+11110 B A 11
+10010 B C 01
+11100 B D 01
+11010 B E 10
+10110 B G 10
+----1 C A 00
+00--0 C C 00
+--000 C C 00
+10--0 C C 00
+01010 C A 11
+11110 C A 11
+01110 C B 01
+11100 C D 01
+11010 C E 10
+01100 C F 10
+----1 D A 00
+00--0 D D 00
+--000 D D 00
+11--0 D D 00
+01010 D A 11
+10100 D A 11
+01110 D B 01
+10010 D C 01
+01100 D F 10
+10110 D G 10
+----1 E A 00
+00--0 E E 00
+--000 E E 00
+--010 E E 00
+11110 E A 11
+10100 E A 11
+01110 E B 01
+11100 E D 01
+01100 E F 10
+10110 E G 10
+----1 F A 00
+00--0 F F 00
+--000 F F 00
+--100 F F 00
+11110 F A 11
+01010 F A 11
+01110 F B 01
+10010 F C 01
+11010 F E 10
+10110 F G 10
+----1 G A 00
+00--0 G G 00
+--000 G G 00
+--110 G G 00
+10100 G A 11
+01010 G A 11
+10010 G C 01
+11100 G D 01
+11010 G E 10
+01100 G F 10
+.end_kiss
+.latch_order LatchOut_v5 LatchOut_v6 LatchOut_v7
+.code A 100
+.code B 001
+.code C 010
+.code D 111
+.code E 000
+.code F 101
+.code G 110
+.names PRIMO_1 SECONDO_2 INIZIA LatchOut_v5 MANCHE_1 MANCHE_2 [28] [2]
+--1---- 1
+0---1-- 1
+-0---1- 1
+----1-1 1
+---100- 1
+.names PRIMO_1 PRIMO_2 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 [4] [12] [13] \
+[14] [15] [16] [27] [28] [3]
+1-----11------ 1
+---0-1--1----- 1
+-0-0-1----1--- 1
+1-1------1--0- 1
+---------10-11 1
+1-101-------0- 1
+1---0---0--100 1
+.names PRIMO_1 PRIMO_2 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 LatchOut_v7 \
+[12] [13] [14] [15] [16] [4]
+--------1--1 1
+-10------1-- 1
+0-----1--1-- 1
+0---0------1 1
+--001--0---- 1
+01-------11- 1
+11---1-----1 1
+.names PRIMO_1 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 [3] [4] [12] [14] [15] \
+[16] [27] [28] MANCHE_1
+----------1-1 1
+------0---11- 1
+--0-100------ 1
+-0---011----- 1
+1---0---1---1 1
+--01----01-1- 1
+.names PRIMO_1 SECONDO_1 INIZIA LatchOut_v5 LatchOut_v7 [3] [4] MANCHE_1 [12] \
+[13] [27] [28] MANCHE_2
+----0-10---- 1
+-----1-00--- 1
+0------1--1- 1
+-----0-1---1 1
+-0-1-10--0-- 1
+0-01------10 1
+.names LatchOut_v6 LatchOut_v7 [12]
+1- 1
+-0 1
+.names PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 [13]
+00-- 1
+--00 1
+.names SECONDO_1 INIZIA [14]
+10 1
+.names LatchOut_v5 LatchOut_v6 [15]
+0- 1
+-0 1
+.names INIZIA LatchOut_v7 [16]
+01 1
+.names PRIMO_2 SECONDO_2 [27]
+11 1
+.names SECONDO_1 [4] [28]
+10 1
+.exdc 
+.inputs PRIMO_1 PRIMO_2 SECONDO_1 SECONDO_2 INIZIA LatchOut_v5 LatchOut_v6 \
+LatchOut_v7
+.outputs [2] [3] [4] MANCHE_1 MANCHE_2
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [2]
+011 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [3]
+011 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 [4]
+011 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 MANCHE_1
+011 1
+.names LatchOut_v5 LatchOut_v6 LatchOut_v7 MANCHE_2
+011 1
+.end

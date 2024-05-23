@@ -1,0 +1,11 @@
+.model mux1bit4in
+.inputs S1 S2 i1 i2 i3 i4
+.outputs out
+
+.names S1 S2 i1 i2 i3 i4 out
+001--- 1
+01-1-- 1
+10--1- 1
+11---1 1
+
+.end
